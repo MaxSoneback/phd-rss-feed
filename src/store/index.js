@@ -10,11 +10,12 @@ export default new Vuex.Store({
   },
   getters: {
     getFeed: (state) => {
-      const sortFn = function(a, b) {
-        return a.isoDate - b.isoDate;
+      const sortFn = function (a, b) {
+        console.log(`${a.isoDate} - ${b.isoDate} = ${a.isoDate - b.isoDate}`)
+        return b.isoDate - a.isoDate;
       };
 
-      const mergeSortedArray = function(a, b) {
+      const mergeSortedArray = function (a, b) {
         var sorted = [],
           indexA = 0,
           indexB = 0;
@@ -54,6 +55,7 @@ export default new Vuex.Store({
       feed = feed.items.filter((item) => item.categories.includes("Doktorand"));
       for (var item of feed) {
         item.university = uni;
+        item.isoDate = new Date(item.isoDate)
       }
       commit("setFeed", { uni, feed });
     },

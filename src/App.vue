@@ -3,7 +3,7 @@
     <v-app-bar app color="primary" dark>
       <h1>PhD RSS</h1>
       <v-spacer></v-spacer>
-      <v-btn flat color="primary">
+      <v-btn color="primary">
         <v-icon>mdi-reload</v-icon>
       </v-btn>
     </v-app-bar>
@@ -20,12 +20,12 @@ export default {
   name: "App",
 
   components: {
-    RssFeed,
+    RssFeed
   },
 
   data: () => ({
     //
-  }),
+  })
 };
 </script>
 
