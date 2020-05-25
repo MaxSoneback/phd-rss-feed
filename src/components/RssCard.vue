@@ -1,8 +1,10 @@
 <template>
-  <v-card class="mb-2 pl-4 pr-4">
+  <v-card class="mb-4 pl-4 pr-4">
     <v-row class="pa-0">
       <v-col :cols="10" class="pa-0">
-        <v-card-title>{{ post.title }}</v-card-title>
+        <v-card-title>
+          <a :href="post.link" target="_blank" class="title-link">{{ post.title }}</a>
+        </v-card-title>
       </v-col>
 
       <v-col class="col-date">
@@ -84,5 +86,10 @@ export default {
 .col-date {
   display: flex;
   justify-content: flex-end;
+}
+
+.title-link {
+  text-decoration: none;
+  color: rgb(51, 51, 51);
 }
 </style>
