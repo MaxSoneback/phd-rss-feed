@@ -7,11 +7,11 @@ export default new Vuex.Store({
   state: {
     //Feed contains an array of objects which contains an array of feed items
     feed: [],
+    show_id: null
   },
   getters: {
     getFeed: (state) => {
       const sortFn = function (a, b) {
-        console.log(`${a.isoDate} - ${b.isoDate} = ${a.isoDate - b.isoDate}`)
         return b.isoDate - a.isoDate;
       };
 
@@ -43,11 +43,18 @@ export default new Vuex.Store({
         return [];
       }
     },
+
+    getShowId: (state) => {
+      return state.show_id
+    }
   },
   mutations: {
-    setFeed: (state, { uni, feed }) => {
+    SET_FEED: (state, { uni, feed }) => {
       state.feed.push({ university: uni, feed: feed });
     },
+    SET_SHOW_ID: (state, id) => {
+      state.show_id = id
+    }
   },
   actions: {
     async getFeed({ commit }, { uni, url }) {
@@ -57,8 +64,11 @@ export default new Vuex.Store({
         item.university = uni;
         item.isoDate = new Date(item.isoDate)
       }
-      commit("setFeed", { uni, feed });
+      commit("SET_FEED", { uni, feed });
     },
+    setShowId({ commit }, id) {
+      commit("SET_SHOW_ID", id)
+    }
   },
   modules: {},
 });
