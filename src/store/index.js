@@ -7,15 +7,15 @@ export default new Vuex.Store({
   state: {
     //Feed contains an array of objects which contains an array of feed items
     feed: [],
-    show_id: null
+    show_id: null,
   },
   getters: {
     getFeed: (state) => {
-      const sortFn = function (a, b) {
+      const sortFn = function(a, b) {
         return b.isoDate - a.isoDate;
       };
 
-      const mergeSortedArray = function (a, b) {
+      const mergeSortedArray = function(a, b) {
         var sorted = [],
           indexA = 0,
           indexB = 0;
@@ -45,30 +45,35 @@ export default new Vuex.Store({
     },
 
     getShowId: (state) => {
-      return state.show_id
-    }
+      return state.show_id;
+    },
   },
   mutations: {
     SET_FEED: (state, { uni, feed }) => {
       state.feed.push({ university: uni, feed: feed });
     },
     SET_SHOW_ID: (state, id) => {
-      state.show_id = id
-    }
+      state.show_id = id;
+    },
   },
   actions: {
     async getFeed({ commit }, { uni, url }) {
-      var feed = await this._vm.$parser.parseURL(url);
+      try {
+        var feed = await this._vm.$parser.parseURL(url);
+      } catch (e) {
+        console.log("Error, reading local file");
+        feed = this._vm.$parser.parseURL("@/assets/example.xml");
+      }
       feed = feed.items.filter((item) => item.categories.includes("Doktorand"));
       for (var item of feed) {
         item.university = uni;
-        item.isoDate = new Date(item.isoDate)
+        item.isoDate = new Date(item.isoDate);
       }
       commit("SET_FEED", { uni, feed });
     },
     setShowId({ commit }, id) {
-      commit("SET_SHOW_ID", id)
-    }
+      commit("SET_SHOW_ID", id);
+    },
   },
   modules: {},
 });

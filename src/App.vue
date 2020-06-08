@@ -1,6 +1,6 @@
 <template>
   <v-app>
-    <v-app-bar app color="primary" dark>
+    <v-app-bar app color="primary" dark id="navbar">
       <h1>PhD RSS</h1>
       <v-spacer></v-spacer>
       <v-btn color="primary">
@@ -20,17 +20,13 @@ export default {
   name: "App",
 
   components: {
-    RssFeed
+    RssFeed,
   },
 
   data: () => ({
     //
-  })
+  }),
 };
 </script>
 
-<style scoped>
-.home,
-.container {
-}
-</style>
+<style scoped></style>

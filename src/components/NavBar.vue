@@ -47,3 +47,9 @@ export default {
   data: () => ({}),
 };
 </script>
+
+<style scoped>
+.navbar {
+  margin-bottom: 60px;
+}
+</style>
